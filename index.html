@@ -1,1 +1,147 @@
-<h1>The future site of staging.LetsVoteApp.com!</h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <script data-ionic="inject">
+    (function(w){var i=w.Ionic=w.Ionic||{};i.version='3.9.2';i.angular='5.0.5';i.staticDir='build/';})(window);
+  </script>
+    <script>
+        window.apiUrl = null;
+    </script>
+    <meta charset="UTF-8">
+    <title>Let's Vote</title>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-title" content="Let's Vote">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest?nocache=15236182664121">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#0B3954">
+
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--spinner styles-->
+    <style id="spinner-style">
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #spinner-container {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            z-index: 10000000;
+            background-color: #0B3954;
+            opacity: 1;
+            transition: opacity .8s linear;
+        }
+
+        #spinner-container.invisible {
+            opacity: 0;
+        }
+
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            margin-top: -30px;
+            margin-left: -30px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: white;
+            border-bottom-color: white;
+            animation: spinner .8s ease infinite;
+        }
+
+        #spinner-close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            cursor: pointer;
+            color: rgb(18, 77, 110);
+            text-align: right;
+        }
+    </style>
+    <script id="hide-spinner-script">
+        var alreadyHidSpinner = false;
+        function hideSpinner() {
+            if (alreadyHidSpinner) {
+                return;
+            }
+            alreadyHidSpinner = true;
+
+            //fade the spinner to invisible
+            document.getElementById('spinner-container').classList.add('invisible');
+            //wait a little bit and then completely remove the spinner and its associated elements
+            setTimeout(function () {
+                document.body.removeChild(document.getElementById('spinner-container'));
+                document.head.removeChild(document.getElementById('spinner-style'));
+                document.body.removeChild(document.getElementById('hide-spinner-fallback'));
+                document.head.removeChild(document.getElementById('hide-spinner-script'));
+            }, 800);
+        }
+    </script>
+
+    <!-- cordova.js required for cordova apps (remove if not needed) -->
+    <!-- <script src="cordova.js"></script> -->
+
+    <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
+  </script>-->
+
+</head>
+
+<body class="loading">
+    <div id="spinner-container">
+        <span id="spinner-close-button" onclick="hideSpinner()">&times;</span>
+        <div class="spinner"></div>
+    </div>
+    <!-- Ionic's root component and where the app will load -->
+    <ion-app></ion-app>
+
+    <link rel="stylesheet" href="build/main.css?nocache=15236182664121" >
+
+    <!-- The polyfills js is generated during the build process -->
+    <script src="build/polyfills.js?nocache=1523618266412"></script>
+
+    <!-- The vendor js is generated during the build process
+       It contains all of the dependencies in node_modules -->
+    <script src="build/vendor.js?nocache=1523618266412"></script>
+
+    <!-- The main bundle js is generated during the build process -->
+    <script src="build/main.js?nocache=1523618266412"></script>
+    <script id="hide-spinner-fallback">
+        //the scripts have loaded at this point. Wait a little bit, and then hide the spinner.
+        //This is a catchall in case the app encounters a critical failure...at least eventually
+        //the user will be able to see the error message
+        setTimeout(hideSpinner, 18000)
+    </script>
+</body>
+
+</html>
