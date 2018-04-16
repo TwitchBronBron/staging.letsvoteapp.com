@@ -83,7 +83,7 @@
             text-align: right;
         }
     </style>
-    <script id="hide-spinner-script">
+    <script>
         var alreadyHidSpinner = false;
         function hideSpinner() {
             if (alreadyHidSpinner) {
@@ -98,7 +98,6 @@
                 document.body.removeChild(document.getElementById('spinner-container'));
                 document.head.removeChild(document.getElementById('spinner-style'));
                 document.body.removeChild(document.getElementById('hide-spinner-fallback'));
-                document.head.removeChild(document.getElementById('hide-spinner-script'));
             }, 800);
         }
     </script>
